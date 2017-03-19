@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="demoreport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ff183d95-ac2d-4ca8-946f-605cb8f6e1ee">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="68"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="pieDataset" uuid="f58c3689-1704-4428-8fca-92d211df12f2">
+		<queryString>
+			<![CDATA[select INVESTMENT_ID, QUANTITY
+FROM INVESTMENT
+]]>
+		</queryString>
+		<field name="INVESTMENT_ID" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="QUANTITY" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[select * from investment
+order by ISSUER]]>
+	</queryString>
+	<field name="INVESTMENT_ID" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PORTFOLIO_ID" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ISSUER" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PURCHASE_DATE" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VALUE" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="INTEREST_RATE" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MATURITY_DATE" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SHARE_PRICE" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="QUANTITY" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="INVESTMENT_TYPE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="quantity" class="java.lang.Long" resetType="Group" resetGroup="issuer" calculation="Sum">
+		<variableExpression><![CDATA[$F{QUANTITY}]]></variableExpression>
+	</variable>
+	<group name="issuer">
+		<groupExpression><![CDATA[$F{ISSUER}]]></groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="100" height="20" backcolor="#CCCCCC" uuid="425eefb5-fc79-4883-aaa0-c0f54fe9b8f5"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ISSUER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="31">
+				<textField>
+					<reportElement x="463" y="3" width="100" height="20" uuid="c463e5eb-7007-450e-9f9d-181aef199318"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{quantity}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="360" y="3" width="100" height="20" uuid="18c25a27-6312-4308-b738-41eb8a7934b7"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Quantity]]></text>
+				</staticText>
+				<line>
+					<reportElement x="346" y="23" width="209" height="1" uuid="22fa8365-5ebd-4cac-81d4-a325e075c841"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="206" y="22" width="190" height="38" uuid="2ef952ec-2a90-4932-a47b-d056645e4137"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Demo Report]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="60" width="555" height="1" uuid="730d53f1-db2e-413f-b997-4a3131c4c8b1"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="92" height="20" uuid="2e0cc320-70fb-4eba-97dd-8329fbe1aa54"/>
+				<text><![CDATA[INVESTMENT_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="0" width="92" height="20" uuid="6db02f70-fc53-442f-b708-b0487732230b"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="0" width="92" height="20" uuid="dbbb73a0-4d79-406f-8c33-4888c020ea3d"/>
+				<text><![CDATA[PURCHASE_DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="92" height="20" uuid="700dbda8-dbbe-4f7c-900f-3e1a04731c5f"/>
+				<text><![CDATA[VALUE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="92" height="20" uuid="5bcf973b-0332-432e-a995-671901179f7c"/>
+				<text><![CDATA[QUANTITY]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="100" height="20" backcolor="#F0F0F0" uuid="0e551398-2944-4332-bd36-05c6ff43a7d9"/>
+				<textFieldExpression><![CDATA[$F{INVESTMENT_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="92" height="20" uuid="0de9a841-54b0-4d1d-9c65-a2abf909f271"/>
+				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="0" width="92" height="20" uuid="a747c972-3a84-430a-b7b3-9affef37a3cd"/>
+				<textFieldExpression><![CDATA[$F{PURCHASE_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="92" height="20" uuid="2acad102-5224-42e3-a5e9-5035dccf97a7"/>
+				<textFieldExpression><![CDATA[$F{VALUE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="92" height="20" uuid="aa9cf6b5-1602-4bf8-9aa0-c6a1f24974bf"/>
+				<textFieldExpression><![CDATA[$F{QUANTITY}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="712b9381-d1aa-4721-a412-9fcc7b14cf57"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="368" y="0" width="195" height="1" uuid="9ddb5c8f-25de-459a-8143-46cee1f77e2b"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="221" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="206" uuid="a81487e6-7b25-4184-b192-22734bbc64bd"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="pieDataset" uuid="41070539-d060-4120-bc9a-4280559e7d2c"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{INVESTMENT_ID}]]></keyExpression>
+					<valueExpression><![CDATA[$F{QUANTITY}]]></valueExpression>
+					<labelExpression><![CDATA[$F{QUANTITY}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>
