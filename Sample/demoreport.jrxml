@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="demoreport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ff183d95-ac2d-4ca8-946f-605cb8f6e1ee">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="68"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="pieDataset" uuid="f58c3689-1704-4428-8fca-92d211df12f2">
 		<queryString>
 			<![CDATA[select INVESTMENT_ID, QUANTITY
-FROM INVESTMENT
-]]>
+FROM INVESTMENT]]>
 		</queryString>
 		<field name="INVESTMENT_ID" class="java.lang.Long">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 		<field name="QUANTITY" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="barDataset" uuid="fc40f285-2e61-4245-ae19-893d2f4a385e">
+		<queryString language="SQL">
+			<![CDATA[select name, value, quantity from investment]]>
+		</queryString>
+		<field name="name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="value" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="quantity" class="java.lang.Long">
 			<fieldDescription><![CDATA[]]></fieldDescription>
 		</field>
 	</subDataset>
@@ -177,7 +190,7 @@ order by ISSUER]]>
 		<band height="221" splitType="Stretch">
 			<pieChart>
 				<chart>
-					<reportElement x="0" y="0" width="555" height="206" uuid="a81487e6-7b25-4184-b192-22734bbc64bd"/>
+					<reportElement x="0" y="0" width="264" height="206" uuid="a81487e6-7b25-4184-b192-22734bbc64bd"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -195,6 +208,34 @@ order by ISSUER]]>
 					<itemLabel/>
 				</piePlot>
 			</pieChart>
+			<barChart>
+				<chart>
+					<reportElement x="264" y="17" width="291" height="189" uuid="2c25ef7d-4607-4d7d-bb5f-fd0afd173fe8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="barDataset" uuid="36ab481a-b611-478c-92eb-6464cfa97c65"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{name}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{quantity}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{value}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
 		</band>
 	</summary>
 </jasperReport>

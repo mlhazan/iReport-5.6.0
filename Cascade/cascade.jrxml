@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cascade" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21c49849-e11e-47a5-b543-90b6daab627d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Chart" uuid="9938b58e-c8c6-40e8-8390-35332b25ebad">
+		<queryString>
+			<![CDATA[select issuer, quantity
+from investment]]>
+		</queryString>
+		<field name="issuer" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="quantity" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="barChart" uuid="d27e29f0-e780-48f8-bba8-f1f52ccbe876">
+		<queryString>
+			<![CDATA[select name,value, quantity from investment]]>
+		</queryString>
+		<field name="name" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="value" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="quantity" class="java.lang.Long">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="ISSUER_MULTI_SELECT" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList(Arrays.asList("Private American Stock Purchases","Long Term Bond Purchases"))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="INVESTMENT_TYPE_MULTI_SELECT" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList(Arrays.asList("STOCK","BOND"))]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from INVESTMENT
+where $X{IN, ISSUER, ISSUER_MULTI_SELECT}
+AND
+$X{IN,INVESTMENT_TYPE,INVESTMENT_TYPE_MULTI_SELECT}
+ORDER BY ISSUER]]>
+	</queryString>
+	<field name="INVESTMENT_ID" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PORTFOLIO_ID" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ISSUER" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PURCHASE_DATE" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VALUE" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="INTEREST_RATE" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MATURITY_DATE" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SHARE_PRICE" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="QUANTITY" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="INVESTMENT_TYPE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="189" y="10" width="237" height="52" uuid="dc7220f5-1c87-4df8-b730-d5beb4b69118"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cascade Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="59" width="100" height="20" uuid="99b38030-ccba-49ac-b538-cf118460fd43"/>
+				<textFieldExpression><![CDATA[$F{INVESTMENT_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="59" width="100" height="20" uuid="bcc91fe6-49e2-4e86-819a-ebcb06943921"/>
+				<textFieldExpression><![CDATA[$F{ISSUER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="128" height="20" forecolor="#FFFFFF" backcolor="#0099FF" uuid="c5aef420-0023-426e-b2e6-445c2f40e9c5"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="138" y="0" width="98" height="20" forecolor="#FFFFFF" backcolor="#0099FF" uuid="6d4b5e3b-355c-4bb0-beb6-d81e307267a9"/>
+				<text><![CDATA[ISSUER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="344" y="0" width="59" height="20" forecolor="#FFFFFF" backcolor="#0099FF" uuid="460462ac-db85-4c53-9ea4-7c8c4d062398"/>
+				<text><![CDATA[QUANTITY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="0" width="138" height="20" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="9e6c88bd-8a4e-4259-8c6f-0d39d5b866b1"/>
+				<text><![CDATA[INVESTMENT_TYPE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="249" y="0" width="79" height="20" forecolor="#FFFFFF" backcolor="#0099FF" uuid="1d751a7e-7c68-4341-93b4-60b351dc46e2"/>
+				<text><![CDATA[PURCHASE_DATE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="128" height="20" backcolor="#CCCCCC" uuid="cfa5cfcd-6a6f-4671-b285-611140f5ce92"/>
+				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="138" y="0" width="98" height="20" uuid="c53345e5-1fa9-40b7-a8f5-2f71bf0054f5"/>
+				<textFieldExpression><![CDATA[$F{ISSUER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="0" width="59" height="20" uuid="b75df2be-dfe6-4d0f-93f5-555296476d77"/>
+				<textFieldExpression><![CDATA[$F{QUANTITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="414" y="0" width="138" height="20" backcolor="#CCCCFF" uuid="0f2fd9e6-89ed-428f-958a-b3318dbd6673"/>
+				<textFieldExpression><![CDATA[$F{INVESTMENT_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="249" y="0" width="79" height="20" uuid="71de0ae0-b3f7-4fa9-8087-1192fdd7f4f4"/>
+				<textFieldExpression><![CDATA[$F{PURCHASE_DATE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="19" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="5" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="213" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="0" width="239" height="213" uuid="0ade5aae-4ad7-49f4-a913-e2d0549d359f"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="Chart" uuid="7ab6a7f1-947c-47f8-a6a5-9325a00ce10d"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{issuer}]]></keyExpression>
+					<valueExpression><![CDATA[$F{quantity}]]></valueExpression>
+					<labelExpression><![CDATA[$F{quantity}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<barChart>
+				<chart>
+					<reportElement x="321" y="98" width="200" height="100" uuid="5a7d9bc9-08b3-49f7-8cc6-97966813bc8c"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="barChart" uuid="bb987612-3586-4acf-a994-add014ad9cff"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{name}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{name}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{value}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>
